@@ -10,7 +10,59 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body class="container">
+    <div class="navbar navbar-expand-sm navbar-light navbar-lewagon" id=container-navbar>
+      <div class="container-fluid">
+        <%= link_to "#", class: "navbar-brand" do %>
+          <i class="fa-solid fa-house"></i>
+        <% end %>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto">
+            <%# if user_signed_in? #%>
+              <li class="nav-item active">
+                <%= link_to "", "#", class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "New post", "#", class: "nav-link" %>
+              </li>
+              <li class="nav-item dropdown d-flex align-items-center" id="dropdown">
+                <i class="fa-solid fa-bars" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <%= link_to "Action", "#", class: "dropdown-item" %>
+                  <%= link_to "Another action", "#", class: "dropdown-item" %>
+                  <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
+                </div>
+              </li>
+            <%# else %>
+              <!--li class="nav-item"-->
+                <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+              <!--/li-->
+            <%# end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+
     <%= yield %>
+
+    <footer>
+      <div class="footer">
+        <div class="footer-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <div class="footer-copyright">
+          <p>footer-copyright</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
