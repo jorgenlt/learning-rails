@@ -6,6 +6,10 @@
 $body-font: "Ubuntu", "Helvetica", "sans-serif";
 $headers-font: "Ubuntu", "Helvetica", "sans-serif";
 
+p {
+  font-weight: 300;
+}
+
 // To use a font file (.woff) uncomment following lines
 // @font-face {
 //   font-family: "Font Name";
