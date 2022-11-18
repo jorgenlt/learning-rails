@@ -2,7 +2,7 @@
 .banner {
   background-size: cover;
   background-position: center;
-  padding: 150px 0;
+  padding: 200px 0;
 }
 
 .banner h1 {
@@ -20,3 +20,13 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
+.banner {
+  opacity: 0.7;
+  background-image: asset-url("broken-ship-beach.jpg"),
+  -webkit-linear-gradient(
+    left, rgba(0, 0, 0, 0.4) 0%,
+          rgba(0, 0, 0, 0) 55%);
+  background-blend-mode: color;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

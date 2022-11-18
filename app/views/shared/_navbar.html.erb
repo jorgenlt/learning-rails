@@ -1,7 +1,7 @@
 <nav>
   <div class="navbar navbar-expand-sm navbar-light navbar-lewagon" id=container-navbar>
     <div class="container-fluid">
-      <%= link_to "#", class: "navbar-brand" do %>
+      <%= link_to root_path, class: "navbar-brand" do %>
         <i class="fa-solid fa-house"></i>
       <% end %>
 
@@ -16,7 +16,7 @@
               <%= link_to "", "#", class: "nav-link" %>
             </li>
             <li class="nav-item dropdown d-flex align-items-center">
-              <span id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">New post</span>
+              <span id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="new-post-navbar"><strong>New post</strong></span>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" id="form-dropdown">
                 <div class="m-3">
                   <%= render '/shared/create_post_form' %>
@@ -28,7 +28,11 @@
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <%= link_to "Action", "#", class: "dropdown-item" %>
                 <%= link_to "Another action", "#", class: "dropdown-item" %>
-                <%= link_to "Log out", "#", class: "dropdown-item", data: {turbo_method: :delete} %>
+                <% if user_signed_in? %>
+                  <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+                <% else %>
+                  <%= link_to "Login", new_user_session_path, class: "dropdown-item" %>
+                <% end %>
               </div>
             </li>
           <%# else %>

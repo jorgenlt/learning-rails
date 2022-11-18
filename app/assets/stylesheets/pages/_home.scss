@@ -3,15 +3,48 @@ body {
   background-color: white;
 }
 
+a:hover, i:hover {
+  opacity: 0.7;
+}
+
+.btn-primary:hover {
+  opacity: 0.7;
+}
+
+.new-post-navbar strong:hover {
+  opacity: 0.7;
+}
+
 #box {
   padding: 20px;
   margin: 10px;
   width: 100%;
+
+    i {
+      font-size: 16px;
+      color: black;
+    }
 }
 
-.banner {
-  opacity: 0.6;
+#post-date {
+  font-size: 12px;
 }
 
+// sortablejs options - move_post_controller.js
+.ghost {
+  opacity: .5;
+  background: #C8EBFB;
+}
 
-  
+.field-search {
+  margin-right: 5px;
+}
+
+.btn-search {
+  width: 150px;
+}
+
+.posts-card {
+  box-shadow: 3px 3px 9px 0px #21211d69;
+  margin-bottom: 15px;
+}

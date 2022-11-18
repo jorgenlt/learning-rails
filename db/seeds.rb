@@ -6,9 +6,10 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+require 'faker'
 
-7.times do
-  Post.create(title: 'this is the title', subtitle: 'this is the subtitle', content: 'this is the content')
+50.times do
+  Post.create(title: Faker::Company.name, subtitle: Faker::Company.industry, content: Faker::Company.catch_phrase, date: Faker::Date.between(from: 300.days.ago, to: Date.today))
   puts 'post created'
 end
 puts 'finished seeding...'

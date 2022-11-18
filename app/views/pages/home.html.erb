@@ -1,23 +1,37 @@
-<div class="banner" style="background-image: url(https://source.unsplash.com/random/1200x500);">
-  <div class="container">
-    <h1>Learning Rails - A test site</h1>
-    <p>Putting everything together for learning purposes.</p>
-    <%# <a class="btn btn-primary btn-flat" href="#">Apply now</a> %>
-  </div>
-</div>
+<%= render 'shared/banner' %>
 
-<div class="mt-2 mb-2 d-flex flex-column">
+<div class="post-group mt-2 mb-2 d-flex flex-column" data-controller="move-posts">
+  <div class="d-flex flex-row">
+    <% if user_signed_in? %>
+      <h5>You are signed in as <strong><%= "#{current_user.first_name} #{current_user.last_name} 🚀" %></strong></h5>
+    <% else %>
+      <h5>You are not signed in.</h5>
+    <% end %>
+  </div>
+
+<%# Search-form for posts %>
+  <div class="d-flex flex-row mt-5 mb-5">
+    <%= form_with url: root_path, method: :get, class: "d-flex w-100" do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control-lg form-control field-search",
+        placeholder: "Find a post"
+      %>
+      <%= submit_tag "Search", class: "btn btn-lg btn-primary btn-search" %>
+    <% end %>
+  </div>
+
+<%# Show posts according to @posts in pages#home %>
   <% @posts.each do |post| %>
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row posts-card">
       <div class="" id="box">
+        <span id="post-date"><%= post.date %></span>
         <h3><%= post.title %></h3>
         <h5><%= post.subtitle %></h5>
         <p><%= post.content %></p>
-        <%= link_to "Delete post",
-          post_path(post),
-          data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }
-          %>
+        <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       </div>
     </div>
   <% end %>
-</div>
