@@ -1,7 +1,6 @@
 <%= render 'shared/carousel' %>
 
-<div class="post-group mt-2 mb-2 d-flex flex-column" data-controller="move-posts">
-  <div class="d-flex flex-row">
+  <div class="d-flex flex-row mt-2 w-100">
     <% if user_signed_in? %>
       <h5>You are signed in as <strong><%= "#{current_user.first_name} #{current_user.last_name} 🚀" %></strong></h5>
     <% else %>
@@ -9,29 +8,35 @@
     <% end %>
   </div>
 
-<%# Search-form for posts %>
-  <div class="d-flex flex-row mt-5 mb-5">
-    <%= form_with url: root_path, method: :get, class: "d-flex w-100" do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control-lg form-control field-search",
-        placeholder: "Find a post"
-      %>
-      <%= submit_tag "Search", class: "btn btn-lg btn-primary btn-search" %>
+<div class="mt-2 mb-2 d-flex flex-row">
+  <div class="post-group mt-2 mb-2 d-flex flex-column col-6" data-controller="move-posts">
+    <%# Search-form for posts %>
+    <div class="d-flex flex-row mt-5 mb-5">
+      <%= form_with url: root_path, method: :get, class: "d-flex w-100" do %>
+        <%= text_field_tag :query,
+          params[:query],
+          class: "form-control-lg form-control field-search",
+          placeholder: "Find a post"
+        %>
+        <%= submit_tag "Search", class: "btn btn-lg btn-primary btn-search" %>
+      <% end %>
+    </div>
+    <%# Show posts according to @posts in pages#home %>
+    <% @posts.each do |post| %>
+      <div class="d-flex flex-row posts-card">
+        <div class="" id="box">
+          <span id="post-date"><%= post.date %></span>
+          <h3><%= post.title %></h3>
+          <h5><%= post.subtitle %></h5>
+          <p><%= post.content %></p>
+          <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
 
-<%# Show posts according to @posts in pages#home %>
-  <% @posts.each do |post| %>
-    <div class="d-flex flex-row posts-card">
-      <div class="" id="box">
-        <span id="post-date"><%= post.date %></span>
-        <h3><%= post.title %></h3>
-        <h5><%= post.subtitle %></h5>
-        <p><%= post.content %></p>
-        <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-          <i class="fa-solid fa-trash"></i>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
+  <div class="second-column post-group mt-2 mb-2 d-flex flex-column col-6">
+  </div>
+</div>
