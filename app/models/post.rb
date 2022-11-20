@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
   # belongs_to :pages, class_name: "pages", foreign_key: "pages_id"
+  has_many :comments
 
   validates :title, :subtitle, presence: true
   validates :content, presence: true
