@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import MovePostsController from "./move_posts_controller"
 application.register("move-posts", MovePostsController)
+
+import ToggleCommentsController from "./toggle_comments_controller"
+application.register("toggle-comments", ToggleCommentsController)

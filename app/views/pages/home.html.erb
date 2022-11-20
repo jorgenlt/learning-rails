@@ -1,6 +1,6 @@
 <%= render 'shared/carousel' %>
 
-  <div class="d-flex flex-row mt-2 w-100">
+  <div class="d-flex flex-row mt-2 w-100 sign-in-confirmation">
     <% if user_signed_in? %>
       <h5>You are signed in as <strong><%= "#{current_user.first_name} #{current_user.last_name} 🚀" %></strong></h5>
     <% else %>
@@ -23,21 +23,25 @@
     </div>
     <%# Show posts according to @posts in pages#home %>
     <% @posts.each do |post| %>
-      <div class="d-flex flex-column posts-card" data-controller="posts-card">
+      <div class="d-flex flex-column posts-card" data-controller="toggle-comments">
         <div class="box">
-          <span id="post-date"><%= post.date %></span>
+          <div class="d-flex justify-content-between">
+            <span id="post-date"><%= post.date %></span>
+            <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          </div>
           <h3><%= post.title %></h3>
           <h5><%= post.subtitle %></h5>
           <p><%= post.content %></p>
-          <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-            <i class="fa-solid fa-trash"></i>
-          <% end %>
-          <i class="fa-solid fa-comment-medical"></i>
-          <i class="fa-solid fa-comments"></i>
+          <i class="fa-solid fa-comment-medical"
+             data-action="click->toggle-comments#toggleCreateComment"></i>
+          <i class="fa-solid fa-comments"
+             data-action="click->toggle-comments#toggleComments"></i>
         </div>
 
         <%# Create new comment %>
-        <div class="box new-comment-box display-none">
+        <div data-toggle-comments-target="new" class="box new-comment-box display-none">
           <p>New comment</p>
           <% comment = Comment.new %>
           <%= simple_form_for comment do |f| %>
@@ -49,7 +53,7 @@
         </div>
 
         <%# Show all comments for post where post_id is post.id %>
-        <div class="comment-box box display-none">
+        <div data-toggle-comments-target="comments" class="comment-box box display-none">
           <% comments = Comment.where(post_id: post.id) %>
           <% comments.each do |comment| %>
           <div class="">
