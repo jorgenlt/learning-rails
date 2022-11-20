@@ -28,16 +28,20 @@
           <div class="d-flex justify-content-between">
             <span id="post-date"><%= post.date %></span>
             <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
-              <i class="fa-solid fa-trash"></i>
+              <span class="post-icon-link"><i class="fa-solid fa-trash"></i>Delete post</span>
             <% end %>
           </div>
           <h3><%= post.title %></h3>
-          <h5><%= post.subtitle %></h5>
-          <p><%= post.content %></p>
-          <i class="fa-solid fa-comment-medical"
-             data-action="click->toggle-comments#toggleCreateComment"></i>
-          <i class="fa-solid fa-comments"
-             data-action="click->toggle-comments#toggleComments"></i>
+          <p class="subtitle"><em><%= post.subtitle %></em></p>
+          <p style="white-space: pre-line"><%= post.content %></p>
+          <span class="post-icon-link" data-action="click->toggle-comments#toggleCreateComment">
+            <i class="fa-solid fa-comment-medical"></i>
+            Add comment
+          </span>
+          <span class="post-icon-link" data-action="click->toggle-comments#toggleComments">
+            <i class="fa-solid fa-comments"></i>
+            See all comments
+          </span>
         </div>
 
         <%# Create new comment %>
@@ -59,7 +63,7 @@
           <div class="">
             <p class="comment-date"><%= comment.date %></p>
             <p class="comment-user">Anonymous</p>
-            <p class="comment-content"><%= comment.content %></p>
+            <p class="comment-content" style="white-space: pre-line"><%= comment.content %></p>
           </div>
           <% end %>
         </div>
