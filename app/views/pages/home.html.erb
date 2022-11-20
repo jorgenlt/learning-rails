@@ -23,14 +23,40 @@
     </div>
     <%# Show posts according to @posts in pages#home %>
     <% @posts.each do |post| %>
-      <div class="d-flex flex-row posts-card">
-        <div class="" id="box">
+      <div class="d-flex flex-column posts-card" data-controller="posts-card">
+        <div class="box">
           <span id="post-date"><%= post.date %></span>
           <h3><%= post.title %></h3>
           <h5><%= post.subtitle %></h5>
           <p><%= post.content %></p>
           <%= link_to post_path(post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
             <i class="fa-solid fa-trash"></i>
+          <% end %>
+          <i class="fa-solid fa-comment-medical"></i>
+          <i class="fa-solid fa-comments"></i>
+        </div>
+
+        <%# Create new comment %>
+        <div class="box new-comment-box display-none">
+          <p>New comment</p>
+          <% comment = Comment.new %>
+          <%= simple_form_for comment do |f| %>
+            <%= hidden_field_tag "comment[post_id]", "#{post.id}" %>
+            <%= hidden_field_tag "comment[date]", "#{Date.today}" %>
+            <%= f.input :content, as: :text %>
+            <%= f.button :submit, class: "btn btn-primary" %>
+          <% end %>
+        </div>
+
+        <%# Show all comments for post where post_id is post.id %>
+        <div class="comment-box box display-none">
+          <% comments = Comment.where(post_id: post.id) %>
+          <% comments.each do |comment| %>
+          <div class="">
+            <p class="comment-date"><%= comment.date %></p>
+            <p class="comment-user">Anonymous</p>
+            <p class="comment-content"><%= comment.content %></p>
+          </div>
           <% end %>
         </div>
       </div>

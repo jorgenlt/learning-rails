@@ -8,7 +8,9 @@
 
 require 'faker'
 
-50.times do
+Post.destroy_all
+
+25.times do
   Post.create(title: Faker::Company.name, subtitle: Faker::Company.industry, content: Faker::Company.catch_phrase, date: Faker::Date.between(from: 300.days.ago, to: Date.today))
   puts 'post created'
 end
